@@ -32,9 +32,17 @@ function fnRegisterMom(){
 
       database.ref().push({
         name: name,
-        role: role,
-        startdate: startdate,
-        monthrate: monthrate
+        address1: address1,
+        address2: address2,
+        city: city,
+        state: state,
+        zipcode: zipcode,
+        email: email,
+        phone: phone,
+        password: password,
+        regdate: regdate,
+        childage: childage,
+        boygirl: boygirl
       });
 }
 
