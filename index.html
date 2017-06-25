@@ -7,8 +7,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
-  
+  <script type="text/javascript" src="Registration.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+ 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     #map {
@@ -46,10 +49,10 @@
       .row.content {height:auto;} 
     }
   </style>
-=======
-  <link rel="stylesheet" href="assets/css/style.css">
 
->>>>>>> 88c9b5e310698d56f2364c6c3809b73dacc8b9f1
+  
+
+
 </head>
 <body>
 
@@ -68,10 +71,13 @@
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Meet Ups</a></li>
-        <li><a href="#">Register</a></li>
+        <li><a data-toggle="modal" data-target="#modalRegister">Register</a></li>
+        <!-- <li><button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+            Launch Normal Form
+        </button></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a data-toggle="modal" data-target="#modalSignIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
       </ul>
     </div>
@@ -81,44 +87,19 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <p><a href="https://www.youtube.com/watch?v=9rle9wF0gL8" target="_blank">Our Inspiration</a></p>
-
-      <p><a href="LocationTest.html">Register Here</a></p>
-      <p><a href="#">Another Link</a></p>
-
+      <!--This is where the local weather feature will be placed -->
     </div>
-<<<<<<< HEAD
+
     <div class="col-sm-8 text-left"> 
       <h1>Let's Meet up</h1>
       <p>This site is for new mom's trying to connect to others in their area.</p>
-=======
-    <div class="col-sm-8 text-left">
-      <h1>March in circles for us!</h1>
-      <p>No job?  Got nowhere to be on a Monday morning, at 8:30?  We would like to hire you.</p>
->>>>>>> 88c9b5e310698d56f2364c6c3809b73dacc8b9f1
+
       <hr>
       <h3>Scheduled Meet-Ups</h3>
       <div id="map"></div>
     </div>
     <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>Meet Ups</p>
-      </div>
-      <div class="well">
-        <p><a href="https://www.uber.com">Uber</a></p>
-      </div>
-      <div class="well">
-        <p><a href="#">Meet-Ups</a></p>
-      </div>
-      <div class="well">
-        <p><a href="#">Area Playgrounds</a></p>
-      </div>
-      <div class="well">
-        <p><a href="#">Local Events</a></p>
-      </div>
-      <div class="well">
-        <p><a href="#">All</a></p>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -131,5 +112,186 @@
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5FnoMDUEmr0pqGC3ZpIRvffD4uKzFGQ0&callback=initMap"
   type="text/javascript"></script>
+
+<!-- Modal - Sign In -->
+<div class="modal fade" id="modalSignIn" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Sign in to Mom's Connect
+                </h4>
+            </div>
+            
+            <!-- Modal Sign in Body -->
+            <div class="modal-body">
+                
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="inputEmail3">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" 
+                        id="inputEmail3" placeholder="Email"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="inputPassword3" >Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control"
+                            id="inputPassword3" placeholder="Password"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label>
+                            <input type="checkbox"/> Remember me
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Sign in</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            
+            <!-- Modal Sign In Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal - Registration -->
+<div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Regristration Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    First Time Registration
+                </h4>
+            </div>
+            
+            <!-- Modal Registration Body -->
+            <div class="modal-body">
+                
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="name-input">Name</label>
+                    <div class="col-sm-10"><input id="name-input" type="text" class="form-control" 
+                         placeholder="Full Name"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="email-input">Email</label>
+                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control" 
+                        placeholder="Email"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="address1-input">Address 1</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="address1-input" placeholder="Address1"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="address2-input">Address 2</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="address2-input" placeholder="Address2"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="city-input">City</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="city-input" placeholder="City"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="state-input">State</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="state-input" placeholder="State"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="zipcode-input">Zip</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="zipcode-input" placeholder="Zip"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="phone-input">Phone</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="phone-input" placeholder="Phone"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="childage-input">Child's Age</label>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="childage-input" placeholder="0"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="radio-inline">
+                        <label><input id="chkGirl" type="radio" name="optradio"> Girl</label>
+                      </div>
+                      <div class="radio-inline">
+                        <label><input  id="chkBoy" type="radio" name="optradio"> Boy</label>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="password-input" >Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control"
+                            id="password-input" placeholder="Password"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input id="chkRemember" type="checkbox"/>Remember me next time</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default" onclick="fnRegisterMom()">Register</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            
+            <!-- Modal Regriations Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
