@@ -2,7 +2,7 @@
 
 //Registration method
 function fnRegisterMom(){
-	alert("in registration");
+	
     var config = {
     apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
     authDomain: "momsconnection-63998.firebaseapp.com",
@@ -20,33 +20,39 @@ function fnRegisterMom(){
     event.preventDefault();
     
     var name = $("#name-input").val().trim();
+    //console.log(name);
     var address1 = $("#address1-input").val().trim();
+    //console.log(address1);
     var address2 = $("#address2-input").val().trim();
+    //console.log(address2);
     var city = $("#city-input").val().trim();
+    //console.log(city);
     var state = $("#state-input").val().trim();
+    //console.log(state);
     var zipcode = $("#zipcode-input").val().trim();
+    //console.log(zipcode);
     var email = $("#email-input").val().trim();
+    //console.log(email);
     var userId = email.substring(0, email.indexOf("@"));
+    //console.log(userId);
     var phone = $("#phone-input").val().trim();
+    //console.log(phone);
     var password = $("#password-input").val().trim();
+    //console.log(password);
     var regdate = new Date();
+    
     var childage = $("#childage-input").val().trim();
-    if($("#chkboy").is(":checked")){
-        var boygirl = "boy";
-    }
-    else if($("#chkgirl").is(":checked")){
-        var boygirl = "girl";
-    }
-    else{
-        var boygirl = "Not Specified";
-    }
+    
+    var boygirl = "Not Specified";
+    boygirl = $('input[name=optradio]:checked').val();
+    
     if($("#chkRemember").is(":checked")){
         var remUser = "yes";
     }
     else{
         var remUser = "no";
     }
-    
+    console.log(remUser);
       database.ref('moms/' + userId).set({
         name: name,
         address1: address1,
@@ -64,7 +70,7 @@ function fnRegisterMom(){
       });
 
   
-
+//alert("hold on");
 }
 
 //Pull Registration data
