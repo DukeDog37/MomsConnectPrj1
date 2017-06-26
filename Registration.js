@@ -74,3 +74,33 @@ function fnRegisterMom(){
 }
 
 //Pull Registration data
+function fnFetchMembers(){
+    
+    var config = {
+    apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
+    authDomain: "momsconnection-63998.firebaseapp.com",
+    databaseURL: "https://momsconnection-63998.firebaseio.com",
+    projectId: "momsconnection-63998",
+    storageBucket: "momsconnection-63998.appspot.com",
+    messagingSenderId: "102438011730"
+  };
+
+    firebase.initializeApp(config);
+
+    // Create a variable to reference the database
+    var database = firebase.database();
+    
+    //event.preventDefault();
+
+    //var userId = firebase.auth().currentUser.uid;
+    database.ref('moms/').once('value').then(function(snapshot) {
+    var name = snapshot.val().name;
+    console.log(name);
+  // ...
+});
+
+    // Add each train's data into the table
+  //$("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
+  //empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+
+};

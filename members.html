@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Mom's Connect Current Members</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="Registration.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <br>
+
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+      <h1 class="text-center">Mom's Connect Members List</h1>
+      <h4>A Comprehensive Directory of our current members</h4>
+    </div>
+    <div class="row">
+      <!-- Employee Records Listing-->
+      <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Current Members</h3>
+              </div>
+            <div class="panel-body">
+            <table class="table table-hover" id='employee-table'>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Member Since</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+      </div>
+    </div>      
+    
+      
+    </div>
+
+  </div>
+
+  
+
+  <!-- Script -->
+  <script>
+   fnFetchMembers();
+  </script>
+
+</body>
+
+</html>
