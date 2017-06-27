@@ -73,6 +73,18 @@ function fnRegisterMom(){
 //alert("hold on");
 }
 
+//lookup geo coords from address
+function fnGeoLookup(address){
+
+    var strGeo = "";
+
+    
+
+    return strGeo;
+}
+
+
+
 //Pull Registration data
 function fnFetchMembers(){
     
@@ -103,7 +115,10 @@ function fnFetchMembers(){
         " </span><span id='email'> " + childSnapshot.val().email +
         " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 + 
         " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + 
-        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + ": " + childSnapshot.val().childage + " </span></div>");
+        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + ": " + childSnapshot.val().childage + " </span>" +
+        " <a class='openmodal' href='#mapmodals' role='button' data-toggle='modal' data-target='#modalMap' data-id=" + childSnapshot.val().name + "><img src='' width='64' height='64' alt='Member Address' title='click to open Map'></a>" +
+        
+        "</div>");
 
         });
               
