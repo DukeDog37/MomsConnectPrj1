@@ -36,20 +36,7 @@
                 <h3 class="panel-title">Current Members</h3>
               </div>
             <div class="panel-body">
-            <table class="table table-hover" id='employee-table'>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Member Since</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
+            <div id="full-member-list" class="FullMomList"</div>
             </div>
       </div>
     </div>      
@@ -64,6 +51,15 @@
   <!-- Script -->
   <script>
    fnFetchMembers();
+
+   $(document).on('click', '#address',function(){
+      var momAddress = $(this).text();
+      console.log(momAddress);
+      
+      
+
+   });
+
   </script>
 
 </body>

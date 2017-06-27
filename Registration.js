@@ -90,17 +90,33 @@ function fnFetchMembers(){
     // Create a variable to reference the database
     var database = firebase.database();
     
-    //event.preventDefault();
-
     //var userId = firebase.auth().currentUser.uid;
-    database.ref('moms/').once('value').then(function(snapshot) {
-    var name = snapshot.val().name;
-    console.log(name);
+    var momsRef = database.ref('moms');
+        momsRef.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+        var childData = childSnapshot.val();
+        console.log(childData); //will log out each mom record
+        console.log(childSnapshot.val().name);
+        //load each result into the table on the members.html form
+        // full list of items to the well
+      $("#full-member-list").append("<div class='well'><span id='name'> " + childSnapshot.val().name +
+        " </span><span id='email'> " + childSnapshot.val().email +
+        " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 + 
+        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + 
+        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + ": " + childSnapshot.val().childage + " </span></div>");
+
+        });
+              
   // ...
-});
+    
+        // Handle the errors
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
 
-    // Add each train's data into the table
-  //$("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-  //empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
-
+    
+  // ...
 };
+
+  
+  
