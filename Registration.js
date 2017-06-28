@@ -2,7 +2,7 @@
 
 //Registration method
 function fnRegisterMom(){
-	
+	alert("firing save");
     var config = {
     apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
     authDomain: "momsconnection-63998.firebaseapp.com",
@@ -73,6 +73,19 @@ function fnRegisterMom(){
 //alert("hold on");
 }
 
+//lookup geo coords from address
+function fnGeoLookup(address){
+
+    var strGeo = "";
+
+    jsonGEO = http://maps.googleapis.com/maps/api/geocode/outputFormat?parameters
+    
+
+    return strGeo;
+}
+
+
+
 //Pull Registration data
 function fnFetchMembers(){
     
@@ -90,17 +103,36 @@ function fnFetchMembers(){
     // Create a variable to reference the database
     var database = firebase.database();
     
-    //event.preventDefault();
-
     //var userId = firebase.auth().currentUser.uid;
-    database.ref('moms/').once('value').then(function(snapshot) {
-    var name = snapshot.val().name;
-    console.log(name);
+    var momsRef = database.ref('moms');
+        momsRef.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+        var childData = childSnapshot.val();
+        var moreContact = childSnapshot.val().email + '<br><br>' + childSnapshot.val().phone
+        console.log(childData); //will log out each mom record
+        console.log(childSnapshot.val().name);
+        //load each result into the table on the members.html form
+        // full list of items to the well
+      $("#full-member-list").append("<div class='well'>" +
+        "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" +
+        " <span id='name'>   " + childSnapshot.val().name +
+        " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 + 
+        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + 
+        " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " Who is age: " + childSnapshot.val().childage + " </span>" +
+        "</div>");
+
+        });
+              
   // ...
-});
+    
+        // Handle the errors
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
 
-    // Add each train's data into the table
-  //$("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-  //empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
-
+    
+  // ...
 };
+
+  
+  
