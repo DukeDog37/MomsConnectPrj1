@@ -61,7 +61,7 @@
             <h4>Contact<h4>
           </div>
         <div class="modal-body">    
-          <div id="map"></div>
+          <div id="addlInfo"></div>
         </div>
         <div class="modal-footer">
           <a class="btn btn-default" data-dismiss="modal">Close</a>
@@ -76,9 +76,9 @@
       
    $(document).on('click', '#openmodal',function(){
     console.log(this);
-      var momAddress = $(this).attr('data-value');
-      console.log(momAddress);
-      $('#map').html(momAddress);
+      var momInformation = $(this).attr('data-value');
+      console.log(momInformation);
+      $('#addlInfo').html(momInformation);
       //var var_mapTitle = momAddress;
       //map code here
       

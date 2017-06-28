@@ -2,7 +2,7 @@
 
 //Registration method
 function fnRegisterMom(){
-	
+	alert("firing save");
     var config = {
     apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
     authDomain: "momsconnection-63998.firebaseapp.com",

@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+  
   <script type="text/javascript" src="Registration.js"></script>
   <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
@@ -197,55 +199,55 @@
                 <form id="regForm" class="form-horizontal" method="post" role="form">
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="name-input">Name</label>
-                    <div class="col-sm-10"><input id="name-input" type="text" class="form-control required radio-inline" placeholder="Full Name" name="name"/>
+                    <div class="col-sm-10"><input id="name-input" type="text" class="form-control" placeholder="Full Name" name="name"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="email-input">Email</label>
-                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control required" 
+                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control" 
                         placeholder="Email" name="email"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address1-input">Address 1</label>
-                    <div class="col-sm-10"><input type="text" class="form-control required" 
-                        id="address1-input" placeholder="Address1"/>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="address1-input" placeholder="Address1" name="address1"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address2-input">Address 2</label>
                     <div class="col-sm-10"><input type="text" class="form-control" 
-                        id="address2-input" placeholder="Address2"/>
+                        id="address2-input" placeholder="Address2" name="address2"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="city-input">City</label>
                     <div class="col-sm-10"><input type="text" class="form-control" 
-                        id="city-input" placeholder="City"/>
+                        id="city-input" placeholder="City" name="city"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="state-input">State</label>
                     <div class="col-sm-10"><input type="text" class="form-control" 
-                        id="state-input" placeholder="State"/>
+                        id="state-input" placeholder="State" name="state"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="zipcode-input">Zip</label>
                     <div class="col-sm-10"><input type="text" class="form-control" 
-                        id="zipcode-input" placeholder="Zip"/>
+                        id="zipcode-input" placeholder="Zip" name="zip"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="phone-input">Phone</label>
                     <div class="col-sm-10"><input type="text" class="form-control" 
-                        id="phone-input" placeholder="Phone"/>
+                        id="phone-input" placeholder="Phone" name="phone"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="childage-input">Child's Age</label>
                     <div class="col-sm-10"><input type="text" class="form-control" 
-                        id="childage-input" placeholder="0"/>
+                        id="childage-input" placeholder="0" name="childage"/>
                     </div>
                   </div>
                   <div class="form-group">
@@ -265,7 +267,7 @@
                           for="password-input" >Password</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control"
-                            id="password-input" placeholder="Password"/>
+                            id="password-input" placeholder="Password" name="password"/>
                     </div>
                   </div>
                   <div class="form-group">
@@ -277,7 +279,7 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-default" onclick="fnRegisterMom()">Register</button>
+                      <button type="submit" class="btn btn-default">Register</button>
                     </div>
                   </div>
                 </form>
@@ -296,13 +298,15 @@
 
 
 $(document).ready(function() {
-    $('#modalRegister').formValidation({
-        framework: 'bootstrap',
-        excluded: ':disabled',
-        icon: {
+    $('#regForm').bootstrapValidator({
+        
+        feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
+        },
+        onSuccess: function(e){
+          console.log(e);
         },
         fields: {
             name: {
@@ -318,10 +322,56 @@ $(document).ready(function() {
                         message: 'The email address is required'
                     }
                 }
+            },
+            address1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Address is required'
+                    }
+                }
+            },
+            state: {
+                validators: {
+                    notEmpty: {
+                        message: 'State is required'
+                    }
+                }
+            },
+            zip: {
+                validators: {
+                    notEmpty: {
+                        message: 'Zipcode is required'
+                    }
+                }
+            },
+            phone: {
+                validators: {
+                    notEmpty: {
+                        message: 'Contact phone number is required'
+                    }
+                }
+            },
+            childage: {
+                validators: {
+                    notEmpty: {
+                        message: 'The age of your child is required'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'A password is required'
+                    }
+                }
             }
         }
-    });
+
+    })
+
+
 });
+
 </script>
 
 
