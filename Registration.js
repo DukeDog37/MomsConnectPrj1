@@ -73,6 +73,19 @@ function fnRegisterMom(){
 //alert("hold on");
 }
 
+//lookup geo coords from address
+function fnGeoLookup(address){
+
+    var strGeo = "";
+
+    // jsonGEO = http://maps.googleapis.com/maps/api/geocode/outputFormat?parameters
+
+
+    return strGeo;
+}
+
+
+
 //Pull Registration data
 function fnFetchMembers(){
 
@@ -90,14 +103,32 @@ function fnFetchMembers(){
     // Create a variable to reference the database
     var database = firebase.database();
 
-    //event.preventDefault();
-
     //var userId = firebase.auth().currentUser.uid;
-    database.ref('moms/').once('value').then(function(snapshot) {
-    var name = snapshot.val().name;
-    console.log(name);
+    var momsRef = database.ref('moms');
+        momsRef.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+        var childData = childSnapshot.val();
+        var moreContact = childSnapshot.val().email + '<br><br>' + childSnapshot.val().phone
+        console.log(childData); //will log out each mom record
+        console.log(childSnapshot.val().name);
+        //load each result into the table on the members.html form
+        // full list of items to the well
+      $("#full-member-list").append("<div class='well'>" +
+        "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" +
+        " <span id='name'>   " + childSnapshot.val().name +
+        " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 +
+        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode +
+        " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " Who is age: " + childSnapshot.val().childage + " </span>" +
+        "</div>");
+
+        });
+
   // ...
-});
+
+        // Handle the errors
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
 
 
 
@@ -111,8 +142,8 @@ function checkSignIn(){
 	event.preventDefault();
 
 
-	var password = $("#inputPassword3").val();
-	var email = $("#inputEmail3").val();
+	var email = $("#usrname").val();
+	var password = $("#psw").val();
 
 	var user = "";
 
@@ -137,8 +168,6 @@ if(attemptedLogin === false)
 
 
 
-console.log(password)
-console.log(email)
 
 var query = firebase.database().ref("moms/").orderByKey();
 query.once("value")
@@ -155,7 +184,6 @@ query.once("value")
 
 		});
 
-
 checkUser(email,password,user);
 attemptedLogin = true;
 
@@ -163,7 +191,7 @@ attemptedLogin = true;
 }
 
 	else {
-
+    console.log('here')
 			checkUser(email,password,user);
 
 			}
@@ -203,20 +231,19 @@ $("#SignInUl").append(newLogin);
 
 
 
+var foundUser = false;
 
 function checkUser(email,password,user){
 
-
 		for (var i = 0; i < userArray.length; i++) {
 
-			var foundUser;
-			// console.log(userArray[i]);
+
+			console.log(userArray[i]);
 			if(i === userArray.length-1 &&  userArray[i].email != email && foundUser === false)
 
 			{
 				console.log("user not found");
 			}
-
 			if(userArray[i].email === email)
 			{
 
@@ -231,8 +258,8 @@ function checkUser(email,password,user){
 					user = userArray[i].name;
 					SignedIn(user);
 
-					Cookies.set('email', email);
-					Cookies.set('password', password);
+					// Cookies.set('email', email);
+					// Cookies.set('password', password);
 
 				}
 
