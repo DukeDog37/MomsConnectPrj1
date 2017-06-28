@@ -230,6 +230,10 @@ function checkUser(email,password,user){
 					$("#modalSignIn").modal("hide");
 					user = userArray[i].name;
 					SignedIn(user);
+
+					Cookies.set('email', email);
+					Cookies.set('password', password);
+
 				}
 
 
