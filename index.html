@@ -137,67 +137,42 @@
 </footer>
 
     
-<!-- Modal - Sign In -->
-<div class="modal fade" id="modalSignIn" tabindex="-1" role="dialog" 
-     aria-labelledby="myModalLabel" aria-hidden="true">
+
+ <!-- Modal -->
+  <div class="modal fade" id="modalSignIn" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Sign in to Mom's Connect
-                </h4>
-            </div>
-            
-            <!-- Modal Sign in Body -->
-            <div class="modal-body">
-                
-                <form class="form-horizontal" role="form">
-                  <div class="form-group">
-                    <label  class="col-sm-2 control-label"
-                              for="inputEmail3">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" 
-                        id="inputEmail3" placeholder="Email"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label"
-                          for="inputPassword3" >Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control"
-                            id="inputPassword3" placeholder="Password"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                            <input type="checkbox"/> Remember me
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-default">Sign in</button>
-                    </div>
-                  </div>
-                </form>
-            </div>
-            
-            <!-- Modal Sign In Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
         </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="text" class="form-control" id="psw" placeholder="Enter password">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="" checked>Remember me</label>
+            </div>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Not a member? <a href="#">Sign Up</a></p>
+          <p>Forgot <a href="#">Password?</a></p>
+        </div>
+      </div>
+      
     </div>
+  </div> 
 </div>
 <!-- Modal - Registration -->
 <div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" 
@@ -219,22 +194,21 @@
             <!-- Modal Registration Body -->
             <div class="modal-body">
                 <div id="saveSuccess"></div>
-                <form class="form-horizontal" role="form">
+                <form id="regForm" class="form-horizontal" method="post" role="form">
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="name-input">Name</label>
-                    <div class="col-sm-10"><input id="name-input" type="text" class="form-control" 
-                         placeholder="Full Name"/>
+                    <div class="col-sm-10"><input id="name-input" type="text" class="form-control required radio-inline" placeholder="Full Name" name="name"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="email-input">Email</label>
-                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control" 
-                        placeholder="Email"/>
+                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control required" 
+                        placeholder="Email" name="email"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address1-input">Address 1</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control required" 
                         id="address1-input" placeholder="Address1"/>
                     </div>
                   </div>
@@ -317,5 +291,39 @@
         </div>
     </div>
 </div>
+
+<script>
+
+
+$(document).ready(function() {
+    $('#modalRegister').formValidation({
+        framework: 'bootstrap',
+        excluded: ':disabled',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+
 </body>
 </html>

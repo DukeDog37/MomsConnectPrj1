@@ -107,17 +107,17 @@ function fnFetchMembers(){
         momsRef.on('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
         var childData = childSnapshot.val();
+        var moreContact = childSnapshot.val().email + '<br><br>' + childSnapshot.val().phone
         console.log(childData); //will log out each mom record
         console.log(childSnapshot.val().name);
         //load each result into the table on the members.html form
         // full list of items to the well
-      $("#full-member-list").append("<div class='well'><span id='name'> " + childSnapshot.val().name +
-        " </span><span id='email'> " + childSnapshot.val().email +
+      $("#full-member-list").append("<div class='well'>" +
+        "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" +
+        " <span id='name'>   " + childSnapshot.val().name +
         " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 + 
         " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + 
-        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + ": " + childSnapshot.val().childage + " </span>" +
-        " <a class='openmodal' href='#mapmodals' role='button' data-toggle='modal' data-target='#modalMap' data-id=" + childSnapshot.val().name + "><img src='' width='64' height='64' alt='Member Address' title='click to open Map'></a>" +
-        
+        " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " Who is age: " + childSnapshot.val().childage + " </span>" +
         "</div>");
 
         });

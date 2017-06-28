@@ -8,133 +8,88 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="Registration.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Registration.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   
   
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
 
+      #map-canvas{
+      width:500px;
+      height:300px;
+      padding-bottom:5px}
+
+  </style>
 </head>
 
 <body>
 
   <div class="container">
-
     <br>
-
-    <!-- Jumbotron -->
-    <div class="jumbotron">
-      <h1 class="text-center">Mom's Connect Members List</h1>
-      <h4>A Comprehensive Directory of our current members</h4>
-    </div>
-    <div class="row">
+   <div class="jumbotron">
+     <h1 class="text-center">Mom's Connect Members List</h1>
+     <h4>A Comprehensive Directory of our current members</h4>
+   </div>
+   <div class="row">
       <!-- Employee Records Listing-->
-      <div class="col-lg-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Current Members</h3>
-              </div>
-            <div class="panel-body">
-            <div id="full-member-list" class="FullMomList"</div>
-            </div>
-      </div>
-    </div>      
-    
-      
-    </div>
-
-  </div>
-
-  <div class="modal fade" id="modalMap" tabindex="-1" role="dialog" 
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Member Location: could also use for parks
-                </h4>
-            </div>
-            
-            <!-- Modal Body: Map Position -->
-            <div class="modal-body">
-                <div id="map"></div>
-            </div>
-            
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Current Members</h3>
         </div>
+        <div class="panel-body">
+          <div id="full-member-list" class="FullMomList">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="map-canvas"></div>
+        </div>  
+      </div>
+          
     </div>
-</div>
+  </div>      
+ 
+
+  <div class="modal fade" id="myModal" role="dialog" >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="back" >  
+          <div class="modal-header">
+            <h4>Contact<h4>
+          </div>
+        <div class="modal-body">    
+          <div id="map"></div>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-default" data-dismiss="modal">Close</a>
+        </div>      
+      </div>
+  </div>
 
   <!-- Script -->
   <script>
-   fnFetchMembers();
+   
 
-   $(document).on('click', '.openmodal',function(){
-      var momAddress = $(this).text();
+      
+   $(document).on('click', '#openmodal',function(){
+    console.log(this);
+      var momAddress = $(this).attr('data-value');
       console.log(momAddress);
-      //send address to google to determine lat long coords
-      var lat = 45.430817;
-      var long = 12.331516;
-      map_init(lat, long);
-      $(".modal-header #title_id").html( var_mapTitle );
-    $('#mapmodals').modal('show');
+      $('#map').html(momAddress);
+      //var var_mapTitle = momAddress;
+      //map code here
+      
+      
    });
 
-   //map initialize
-   function map_init(var_lati,var_long){
-    
-    var var_location = new google.maps.LatLng(var_lati,var_long);
-  
-    var var_mapoptions = {
-      zoom: 14,
-      mapTypeControl: false,
-      center:var_location,
-      panControl:false,
-      rotateControl:false,
-      streetViewControl: false,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
- 
-    var var_map = new google.maps.Map(document.getElementById("map-container"), var_mapoptions);
- 
-    var var_infowindow = new google.maps.InfoWindow({
-      content: var_contentString
-    });
-    
-    var var_marker = new google.maps.Marker({
-    position: var_location,
-    map: var_map,
-    title:var_markerTitle,
-    maxWidth: 200,
-    maxHeight: 200
-    });
-    
-    google.maps.event.addListener(var_marker, 'click', function() {
-      var_infowindow.open(var_map,var_marker);
-    });
- 
-      $('#mapmodals').on('shown.bs.modal', function () {
-          google.maps.event.trigger(var_map, "resize");
-          var_map.setCenter(var_location);
-      });
-  }
-  
+   fnFetchMembers();   
+
   
   </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5FnoMDUEmr0pqGC3ZpIRvffD4uKzFGQ0&callback=initMap"
-  type="text/javascript"></script>
+  
 </body>
 
 </html>
