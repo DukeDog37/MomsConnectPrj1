@@ -11,9 +11,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
 
  <script type="text/javascript" src="Registration.js"></script>
- 
- <script src="assets/javascript/js-cookie.js"></script>
 
+ <script src="assets/javascript/js-cookie.js"></script>
+ <script src="assets/javascript/tether.min.js"></script>
+
+ </script>
   <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
@@ -29,7 +31,7 @@
     #sitelogo{
       margin-top: 10px;
     }
-  
+
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
 
@@ -58,7 +60,7 @@
   </style>
 
 </head>
-<body>
+<body onload = "checkCookie()">
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -75,7 +77,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">Resources</a></li>
-        
+
         <li><a href="members.html">View Members</a></li>
         <li><a data-toggle="modal" data-target="#modalRegister">Register</a></li>
 
@@ -157,25 +159,21 @@
           <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form">
+          <form role="form" data-toggle= "validator">
             <div class="form-group">
               <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+              <input title = "The email you’ve entered doesn’t match any account, try again or register." data-trigger = "manual" data-toggle= "tooltip" data-placement ="right" type="email" class="form-control" id="usrname" placeholder="Enter email">
             </div>
             <div class="form-group">
               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="text" class="form-control" id="psw" placeholder="Enter password">
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value="" checked>Remember me</label>
+              <input title = "Incorrect Password, try again." data-trigger = "manual" data-toggle= "tooltip" data-placement ="right" type="password" class="form-control" id="psw" placeholder="Enter password">
             </div>
               <button onclick="checkSignIn()" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <p>Not a member? <a href="#">Sign Up</a></p>
-          <p>Forgot <a href="#">Password?</a></p>
+
         </div>
       </div>
 
@@ -203,7 +201,7 @@
             <div class="modal-body">
                 <div id="saveSuccess"></div>
                 <form id="regForm" class="form-horizontal" method="post" role="form" data-toggle="validator">
-                  
+
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="name-input">Name</label>
                     <div class="col-sm-10"><input id="name-input" type="text" class="form-control" placeholder="Full Name" name="name" required/>
@@ -212,55 +210,55 @@
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="email-input">Email</label>
-                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control" 
+                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control"
                         placeholder="Email" name="email" required/>
                     </div>
-                    <div class="help-block with-errors"></div>                    
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address1-input">Address 1</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="address1-input" placeholder="Address1" name="address1" required/>
                     </div>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address2-input">Address 2</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="address2-input" placeholder="Address2" name="address2"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="city-input">City</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="city-input" placeholder="City" name="city" required/>
                     </div>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="state-input">State</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="state-input" placeholder="State" name="state" required/>
                     </div>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="zipcode-input">Zip</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="zipcode-input" placeholder="Zip" name="zip" required/>
                     </div>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="phone-input">Phone</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="phone-input" placeholder="Phone" name="phone" required/>
                     </div>
                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="childage-input">Child's Age</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="childage-input" placeholder="0" name="childage" required/>
                     </div>
                     <div class="help-block with-errors"></div>
@@ -273,10 +271,10 @@
                       <div class="radio-inline">
                         <label><input  id="chkBoy" type="radio" name="optradio" value="Boy"> Boy</label>
                       </div>
-                      
+
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
                     <label class="col-sm-2 control-label"
                           for="password-input" >Password</label>
@@ -308,6 +306,24 @@
         </div>
     </div>
 </div>
+
+<!-- Welcome back message Modal -->
+<div id = "WelcomeBackModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class = "welcomeBack" class="modal-title">Welcome Back</h4>
+      </div>
+      <div class="modal-body">
+        <p class = "welcomeBack" id = "WelcomeBackUser"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <script>
 
