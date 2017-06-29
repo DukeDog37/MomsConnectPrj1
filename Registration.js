@@ -190,7 +190,6 @@ attemptedLogin = true;
 }
 
 	else {
-    console.log('here')
 			checkUser(email,password,user);
 
 			}
@@ -223,8 +222,11 @@ $("#SignInUl").append(newLogOut);
 
 
 function LogOut(){
+  var user=getCookie("username");
+  if (user != "") {
+  deleteCookie("username",user,0);
 
-
+}
 	$("#SignInUl").empty();
 
 var newLogin = $("<li>");
@@ -262,8 +264,10 @@ function checkUser(email,password,user){
 					user = userArray[i].name;
 					SignedIn(user);
 
-					// Cookies.set('email', email);
-					// Cookies.set('password', password);
+        // store da cookie
+          if (user != "" && user != null) {
+              setCookie("username", user, 30);
+          }
 
 				}
 
@@ -279,3 +283,56 @@ function checkUser(email,password,user){
 };
 
 };
+
+
+
+// setting cookies below
+
+function deleteCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
+
+function checkCookie() {
+    var user=getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+
+        SignedIn(user);
+    } else {
+
+      console.log(user)
+      $("#modalSignIn").modal("show");
+
+    }
+}
