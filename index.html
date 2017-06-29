@@ -9,48 +9,52 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
-  
+
  <script type="text/javascript" src="Registration.js"></script>
+ 
+ <script src="assets/javascript/js-cookie.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
- 
+
+
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    
+    /* Remove the navbar's default margin-bottom and rounded borders */
+
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
-    
+
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
-    
+
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
       background-color: #ffe6ff;
-      
+
     }
-    
+
     /* Set black background color, white text and some padding */
     footer {
       background-color: #ff4dff;
       color: white;
       padding: 15px;
     }
-    
+
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;} 
+      .row.content {height:auto;}
     }
   </style>
 
-  
+
 
 
 </head>
@@ -73,10 +77,10 @@
         <li><a href="#">Meet Ups</a></li>
         <li><a href="members.html">View Members</a></li>
         <li><a data-toggle="modal" data-target="#modalRegister">Register</a></li>
-        
+
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a data-toggle="modal" data-target="#modalSignIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <ul id = "SignInUl" class="nav navbar-nav navbar-right">
+        <li id = "SignInLi"><a data-toggle="modal" data-target="#modalSignIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
       </ul>
     </div>
@@ -89,7 +93,7 @@
       <!--This is where the local weather feature will be placed -->
     </div>
 
-    <div class="col-sm-8 text-left"> 
+    <div class="col-sm-8 text-left">
       <h1>Let's Meet up</h1>
       <p>This site is for new mom's trying to connect to others in their area.</p>
 
@@ -130,7 +134,7 @@
         </div>
             </div>
     <div class="col-sm-2 sidenav">
-      
+
     </div>
   </div>
 </div>
@@ -139,12 +143,12 @@
   <p>Footer Text</p>
 </footer>
 
-    
+
 
  <!-- Modal -->
   <div class="modal fade" id="modalSignIn" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
@@ -164,7 +168,7 @@
             <div class="checkbox">
               <label><input type="checkbox" value="" checked>Remember me</label>
             </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              <button onclick="checkSignIn()" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -173,18 +177,18 @@
           <p>Forgot <a href="#">Password?</a></p>
         </div>
       </div>
-      
+
     </div>
-  </div> 
+  </div>
 </div>
 <!-- Modal - Registration -->
-<div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" 
+<div class="modal fade" id="modalRegister" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Regristration Header -->
             <div class="modal-header">
-                <button type="button" class="close" 
+                <button type="button" class="close"
                    data-dismiss="modal">
                        <span aria-hidden="true">&times;</span>
                        <span class="sr-only">Close</span>
@@ -193,7 +197,7 @@
                     First Time Registration
                 </h4>
             </div>
-            
+
             <!-- Modal Registration Body -->
             <div class="modal-body">
                 <div id="saveSuccess"></div>
@@ -205,49 +209,49 @@
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="email-input">Email</label>
-                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control" 
+                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control"
                         placeholder="Email" name="email"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address1-input">Address 1</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="address1-input" placeholder="Address1" name="address1"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address2-input">Address 2</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="address2-input" placeholder="Address2" name="address2"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="city-input">City</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="city-input" placeholder="City" name="city"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="state-input">State</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="state-input" placeholder="State" name="state"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="zipcode-input">Zip</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="zipcode-input" placeholder="Zip" name="zip"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="phone-input">Phone</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="phone-input" placeholder="Phone" name="phone"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="childage-input">Child's Age</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" 
+                    <div class="col-sm-10"><input type="text" class="form-control"
                         id="childage-input" placeholder="0" name="childage"/>
                     </div>
                   </div>
@@ -259,10 +263,10 @@
                       <div class="radio-inline">
                         <label><input  id="chkBoy" type="radio" name="optradio" value="Boy"> Boy</label>
                       </div>
-                      
+
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
                     <label class="col-sm-2 control-label"
                           for="password-input" >Password</label>
@@ -285,7 +289,7 @@
                   </div>
                 </form>
             </div>
-            
+
             <!-- Modal Regriations Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
@@ -300,7 +304,7 @@
 
 $(document).ready(function() {
     $('#regForm').bootstrapValidator({
-        
+
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -376,6 +380,6 @@ $(document).ready(function() {
 </script>
 
 
-  
+
 </body>
 </html>
