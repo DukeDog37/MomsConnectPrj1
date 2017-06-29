@@ -2,7 +2,7 @@
 
 //Registration method
 function fnRegisterMom(){
-	alert("firing save");
+
     var config = {
     apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
     authDomain: "momsconnection-63998.firebaseapp.com",
@@ -18,7 +18,7 @@ function fnRegisterMom(){
     var database = firebase.database();
     // Capture Button Click
     event.preventDefault();
-    
+
     var name = $("#name-input").val().trim();
     //console.log(name);
     var address1 = $("#address1-input").val().trim();
@@ -40,12 +40,12 @@ function fnRegisterMom(){
     var password = $("#password-input").val().trim();
     //console.log(password);
     var regdate = new Date();
-    
+
     var childage = $("#childage-input").val().trim();
-    
+
     var boygirl = "Not Specified";
     boygirl = $('input[name=optradio]:checked').val();
-    
+
     if($("#chkRemember").is(":checked")){
         var remUser = "yes";
     }
@@ -69,7 +69,7 @@ function fnRegisterMom(){
         rememberUser: remUser
       });
 
-  
+
 //alert("hold on");
 }
 
@@ -78,8 +78,7 @@ function fnGeoLookup(address){
 
     var strGeo = "";
 
-    //jsonGEO = http://maps.googleapis.com/maps/api/geocode/outputFormat?parameters
-    
+
 
     return strGeo;
 }
@@ -88,7 +87,7 @@ function fnGeoLookup(address){
 
 //Pull Registration data
 function fnFetchMembers(){
-    
+
     var config = {
     apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
     authDomain: "momsconnection-63998.firebaseapp.com",
@@ -102,7 +101,7 @@ function fnFetchMembers(){
 
     // Create a variable to reference the database
     var database = firebase.database();
-    
+
     //var userId = firebase.auth().currentUser.uid;
     var momsRef = database.ref('moms');
         momsRef.on('value', function(snapshot) {
@@ -116,23 +115,167 @@ function fnFetchMembers(){
       $("#full-member-list").append("<div class='well'>" +
         "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" +
         " <span id='name'>   " + childSnapshot.val().name +
-        " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 + 
-        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + 
+        " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 +
+        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode +
         " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " Who is age: " + childSnapshot.val().childage + " </span>" +
         "</div>");
 
         });
-              
+
   // ...
-    
+
         // Handle the errors
     }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
     });
 
-    
-  // ...
+
+
 };
 
-  
-  
+
+var userArray = [];
+var attemptedLogin = false;
+
+function checkSignIn(){
+	event.preventDefault();
+
+
+	var email = $("#usrname").val();
+	var password = $("#psw").val();
+
+	var user = "";
+
+if(attemptedLogin === false)
+
+{
+
+
+
+	var config = {
+	apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
+	authDomain: "momsconnection-63998.firebaseapp.com",
+	databaseURL: "https://momsconnection-63998.firebaseio.com",
+	projectId: "momsconnection-63998",
+	storageBucket: "momsconnection-63998.appspot.com",
+	messagingSenderId: "102438011730"
+	};
+
+
+	firebase.initializeApp(config);
+	var database = firebase.database();
+
+
+
+
+var query = firebase.database().ref("moms/").orderByKey();
+query.once("value")
+     .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key;
+			// console.log(key);
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+
+			userArray.push(childData);
+			// console.log(childData);
+
+
+		});
+
+checkUser(email,password,user);
+attemptedLogin = true;
+
+	});
+}
+
+	else {
+    console.log('here')
+			checkUser(email,password,user);
+
+			}
+
+// end of function
+};
+
+
+function SignedIn(user){
+
+$("#SignInLi").empty();
+
+
+var newSignIn = $("<li>");
+var newLogOut = $("<li>");
+
+newSignIn.attr("id","SignInGlyph")
+newSignIn.html("<span  class='glyphicon glyphicon-user'></span>" + " " + user )
+
+
+newLogOut.attr("id","LogOutBtn");
+newLogOut.html("<button type='button' id = 'LogOutBtn' onclick='LogOut()' class='btn btn-default btn-sm'> <span class='glyphicon glyphicon-log-out'></span> Log out </button>")
+$("#SignInUl").append(newSignIn);
+$("#SignInUl").append(newLogOut);
+
+
+
+};
+
+
+
+function LogOut(){
+
+
+	$("#SignInUl").empty();
+
+var newLogin = $("<li>");
+newLogin.attr("id","SignInLi")
+newLogin.html("<a data-toggle='modal' data-target='#modalSignIn'><span class='glyphicon glyphicon-log-in'></span> Login</a>")
+$("#SignInUl").append(newLogin);
+};
+
+
+
+var foundUser = false;
+
+function checkUser(email,password,user){
+
+		for (var i = 0; i < userArray.length; i++) {
+
+
+			console.log(userArray[i]);
+			if(i === userArray.length-1 &&  userArray[i].email != email && foundUser === false)
+
+			{
+				console.log("user not found");
+			}
+			if(userArray[i].email === email)
+			{
+
+				console.log("user Exist")
+				foundUser = true;
+
+				 if(userArray[i].password === password)
+				{
+					console.log("pass confirmed")
+
+					$("#modalSignIn").modal("hide");
+					user = userArray[i].name;
+					SignedIn(user);
+
+					// Cookies.set('email', email);
+					// Cookies.set('password', password);
+
+				}
+
+
+				if(userArray[i].password != password) {
+				console.log("incorrect pass")
+				}
+
+
+
+		};
+
+};
+
+};

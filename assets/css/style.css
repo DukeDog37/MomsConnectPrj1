@@ -1,4 +1,25 @@
 /* Remove the navbar's default margin-bottom and rounded borders */
+
+#SignInGlyph{
+
+position:relative;
+right:20px;
+top:20px;
+
+color:pink;
+
+}
+
+
+#LogOutBtn{
+  position:relative;
+
+top:5px
+
+
+}
+
+
 #map {
     height: 400px;
     width: 100%;
