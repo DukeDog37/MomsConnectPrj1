@@ -207,8 +207,13 @@ $("#SignInLi").empty();
 
 var newSignIn = $("<li>");
 var newLogOut = $("<li>");
-newSignIn.html("<span class='glyphicon glyphicon-user'></span>" + user)
-newLogOut.html("<button type='button' onclick='LogOut()' class='btn btn-default btn-sm'> <span class='glyphicon glyphicon-log-out'></span> Log out </button>")
+
+newSignIn.attr("id","SignInGlyph")
+newSignIn.html("<span  class='glyphicon glyphicon-user'></span>" + " " + user )
+
+
+newLogOut.attr("id","LogOutBtn");
+newLogOut.html("<button type='button' id = 'LogOutBtn' onclick='LogOut()' class='btn btn-default btn-sm'> <span class='glyphicon glyphicon-log-out'></span> Log out </button>")
 $("#SignInUl").append(newSignIn);
 $("#SignInUl").append(newLogOut);
 
