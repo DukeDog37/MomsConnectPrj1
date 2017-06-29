@@ -136,6 +136,7 @@ function fnFetchMembers(){
 
 var userArray = [];
 var attemptedLogin = false;
+var RememberUser;
 
 function checkSignIn(){
 	event.preventDefault();
@@ -249,6 +250,7 @@ function checkUser(email,password,user){
 
 			{
 				console.log("user not found");
+        $("#usrname").tooltip('show');
 			}
 			if(userArray[i].email === email)
 			{
@@ -264,6 +266,7 @@ function checkUser(email,password,user){
 					user = userArray[i].name;
 					SignedIn(user);
 
+
         // store da cookie
           if (user != "" && user != null) {
               setCookie("username", user, 30);
@@ -274,6 +277,8 @@ function checkUser(email,password,user){
 
 				if(userArray[i].password != password) {
 				console.log("incorrect pass")
+        $("#psw").tooltip('show');
+
 				}
 
 
@@ -326,7 +331,8 @@ function getCookie(cname) {
 function checkCookie() {
     var user=getCookie("username");
     if (user != "") {
-        alert("Welcome again " + user);
+$("#WelcomeBack").html(user)
+$("#WelcomeBackModal").modal("show");
 
         SignedIn(user);
     } else {

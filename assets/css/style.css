@@ -1,5 +1,13 @@
 /* Remove the navbar's default margin-bottom and rounded borders */
 
+.welcomeBack
+{
+  text-align:center;
+}
+
+
+
+
 #SignInGlyph{
 
 position:relative;
