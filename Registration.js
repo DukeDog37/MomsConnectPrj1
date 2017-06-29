@@ -78,7 +78,6 @@ function fnGeoLookup(address){
 
     var strGeo = "";
 
-    // jsonGEO = http://maps.googleapis.com/maps/api/geocode/outputFormat?parameters
 
 
     return strGeo;

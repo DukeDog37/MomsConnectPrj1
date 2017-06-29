@@ -18,15 +18,18 @@
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 
-
+  <script src="assets/javascript/validator.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
-
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
 
+    #sitelogo{
+      margin-top: 10px;
+    }
+  
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
 
@@ -54,9 +57,6 @@
     }
   </style>
 
-
-
-
 </head>
 <body>
 
@@ -68,13 +68,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      <img id="sitelogo" src="assets/images/sitelogo.jpg" alt="">
+
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Meet Ups</a></li>
+        <li><a href="#">Resources</a></li>
+        
         <li><a href="members.html">View Members</a></li>
         <li><a data-toggle="modal" data-target="#modalRegister">Register</a></li>
 
@@ -201,59 +202,68 @@
             <!-- Modal Registration Body -->
             <div class="modal-body">
                 <div id="saveSuccess"></div>
-                <form id="regForm" class="form-horizontal" method="post" role="form">
+                <form id="regForm" class="form-horizontal" method="post" role="form" data-toggle="validator">
+                  
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="name-input">Name</label>
-                    <div class="col-sm-10"><input id="name-input" type="text" class="form-control" placeholder="Full Name" name="name"/>
+                    <div class="col-sm-10"><input id="name-input" type="text" class="form-control" placeholder="Full Name" name="name" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="email-input">Email</label>
-                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control"
-                        placeholder="Email" name="email"/>
+                    <div class="col-sm-10"><input id="email-input" type="email" class="form-control" 
+                        placeholder="Email" name="email" required/>
                     </div>
+                    <div class="help-block with-errors"></div>                    
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address1-input">Address 1</label>
-                    <div class="col-sm-10"><input type="text" class="form-control"
-                        id="address1-input" placeholder="Address1" name="address1"/>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="address1-input" placeholder="Address1" name="address1" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="address2-input">Address 2</label>
-                    <div class="col-sm-10"><input type="text" class="form-control"
+                    <div class="col-sm-10"><input type="text" class="form-control" 
                         id="address2-input" placeholder="Address2" name="address2"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="city-input">City</label>
-                    <div class="col-sm-10"><input type="text" class="form-control"
-                        id="city-input" placeholder="City" name="city"/>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="city-input" placeholder="City" name="city" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="state-input">State</label>
-                    <div class="col-sm-10"><input type="text" class="form-control"
-                        id="state-input" placeholder="State" name="state"/>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="state-input" placeholder="State" name="state" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="zipcode-input">Zip</label>
-                    <div class="col-sm-10"><input type="text" class="form-control"
-                        id="zipcode-input" placeholder="Zip" name="zip"/>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="zipcode-input" placeholder="Zip" name="zip" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="phone-input">Phone</label>
-                    <div class="col-sm-10"><input type="text" class="form-control"
-                        id="phone-input" placeholder="Phone" name="phone"/>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="phone-input" placeholder="Phone" name="phone" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 control-label" for="childage-input">Child's Age</label>
-                    <div class="col-sm-10"><input type="text" class="form-control"
-                        id="childage-input" placeholder="0" name="childage"/>
+                    <div class="col-sm-10"><input type="text" class="form-control" 
+                        id="childage-input" placeholder="0" name="childage" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
@@ -263,17 +273,18 @@
                       <div class="radio-inline">
                         <label><input  id="chkBoy" type="radio" name="optradio" value="Boy"> Boy</label>
                       </div>
-
+                      
                     </div>
                   </div>
-
+                  
                   <div class="form-group">
                     <label class="col-sm-2 control-label"
                           for="password-input" >Password</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control"
-                            id="password-input" placeholder="Password" name="password"/>
+                            id="password-input" placeholder="Password" name="password" required/>
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
@@ -289,7 +300,6 @@
                   </div>
                 </form>
             </div>
-
             <!-- Modal Regriations Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
@@ -303,78 +313,15 @@
 
 
 $(document).ready(function() {
-    $('#regForm').bootstrapValidator({
 
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        onSuccess: function(e){
-          console.log(e);
-        },
-        fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The name is required'
-                    }
-                }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'The email address is required'
-                    }
-                }
-            },
-            address1: {
-                validators: {
-                    notEmpty: {
-                        message: 'Address is required'
-                    }
-                }
-            },
-            state: {
-                validators: {
-                    notEmpty: {
-                        message: 'State is required'
-                    }
-                }
-            },
-            zip: {
-                validators: {
-                    notEmpty: {
-                        message: 'Zipcode is required'
-                    }
-                }
-            },
-            phone: {
-                validators: {
-                    notEmpty: {
-                        message: 'Contact phone number is required'
-                    }
-                }
-            },
-            childage: {
-                validators: {
-                    notEmpty: {
-                        message: 'The age of your child is required'
-                    }
-                }
-            },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'A password is required'
-                    }
-                }
-            }
-        }
-
+    $('#regForm').validator().on('submit', function (e) {
+      if (e.isDefaultPrevented()) {
+        // handle the invalid form...
+      } else {
+        // everything looks good!
+        fnRegisterMom();
+      }
     })
-
-
 });
 
 </script>
