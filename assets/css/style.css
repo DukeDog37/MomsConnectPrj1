@@ -6,6 +6,26 @@
 .navbar {
   margin-bottom: 0;
   border-radius: 0;
+
+}
+h1, h3 {
+  font-family: 'Bad Script', cursive;
+}
+
+body {
+  background-image: url(../images/images-1.jpg);
+
+}
+
+a {
+  color:black;
+  font-family: 'Bad Script', cursive;
+  font-size: 20px;
+}
+
+p {
+  font-family: 'Bad Script', cursive;
+  font-size: 20px;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -13,16 +33,26 @@
 
 /* Set gray background color and 100% height */
 .sidenav {
+
   padding-top: 20px;
-  background-color: #f1f1f1;
+  background-image: url(../images/satinweave.png);
   height: 100%;
+
 }
+
+.navbar-inverse .navbar-nav>li>a {
+  color: lightgrey;
+}
+
+
 
 /* Set black background color, white text and some padding */
 footer {
-  background-color: #555;
+  background-color: black;
   color: white;
-  padding: 15px;
+  padding: 20px;
+
+
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
