@@ -20,29 +20,17 @@ function fnRegisterMom(){
     event.preventDefault();
 
     var name = $("#name-input").val().trim();
-    //console.log(name);
     var address1 = $("#address1-input").val().trim();
-    //console.log(address1);
     var address2 = $("#address2-input").val().trim();
-    //console.log(address2);
     var city = $("#city-input").val().trim();
-    //console.log(city);
     var state = $("#state-input").val().trim();
-    //console.log(state);
     var zipcode = $("#zipcode-input").val().trim();
-    //console.log(zipcode);
     var email = $("#email-input").val().trim();
-    //console.log(email);
     var userId = email.substring(0, email.indexOf("@"));
-    //console.log(userId);
     var phone = $("#phone-input").val().trim();
-    //console.log(phone);
     var password = $("#password-input").val().trim();
-    //console.log(password);
     var regdate = new Date();
-
     var childage = $("#childage-input").val().trim();
-
     var boygirl = "Not Specified";
     boygirl = $('input[name=optradio]:checked').val();
 
@@ -69,21 +57,7 @@ function fnRegisterMom(){
         rememberUser: remUser
       });
 
-
-//alert("hold on");
 }
-
-//lookup geo coords from address
-function fnGeoLookup(address){
-
-    var strGeo = "";
-
-
-
-    return strGeo;
-}
-
-
 
 //Pull Registration data
 function fnFetchMembers(){
@@ -112,19 +86,23 @@ function fnFetchMembers(){
         console.log(childSnapshot.val().name);
         //load each result into the table on the members.html form
         // full list of items to the well
-      $("#full-member-list").append("<div class='well'>" +
+      /*$("#full-member-list").append("<div class='well'>" +
         "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" +
         " <span id='name'>   " + childSnapshot.val().name +
         " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 +
         " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode +
-        " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " Who is age: " + childSnapshot.val().childage + " </span>" +
-        "</div>");
+        " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " age: " + childSnapshot.val().childage + " </span>" +
+        "</div>");*/
+
+      $("#member-table > tbody").append("<tr><td></td><td>" + childSnapshot.val().name + 
+        "</td><td>" + childSnapshot.val().address1 + " " + childSnapshot.val().address2 +
+        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + "</td><td>" +
+        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + " age: " + childSnapshot.val().childage + " </span>" +
+        "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" + "</td><tr>");
 
         });
 
-  // ...
-
-        // Handle the errors
+       // Handle the errors
     }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
     });
