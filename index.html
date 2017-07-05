@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>New Mom's Connect - git check jason</title>
+  <title>Mom's Connect</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
-
- <script type="text/javascript" src="Registration.js"></script>
- 
- <script src="assets/javascript/js-cookie.js"></script>
-
+  <script type="text/javascript" src="Registration.js"></script>
+  <script src="assets/javascript/js-cookie.js"></script>
   <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-  <link rel="stylesheet" href="assets/css/style.css">
-
   <script src="assets/javascript/validator.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
+      height: 70px;
+
     }
 
     #sitelogo{
-      margin-top: 10px;
+      margin-top: 11px;
+      height: 42px;
+      width: 37px;
     }
   
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -35,16 +37,27 @@
 
     /* Set gray background color and 100% height */
     .sidenav {
-      padding-top: 20px;
+      padding-top: 18px;
       background-color: #ffe6ff;
+      height: 180%;
+      font-family: verdana;
+      letter-spacing: 2px;
 
+    }
+
+    h6 {
+      font-size: 14px;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #ff4dff;
+      background-color: #fac5f6;
       color: white;
-      padding: 15px;
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+      height: 70px;
+      
     }
 
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -53,14 +66,97 @@
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;}
+      
+      .row.content {
+        height:auto;
+        width: auto;
+      }
+      
+    img{
+        height: auto;
+        width: auto;
+
+      }
     }
-  </style>
+
+    li {
+      margin-top: 10px;
+    }
+
+    p {
+      font-family: verdana;
+      font-size: 12px;
+
+    }
+
+
+    #myNavbar {
+    font-family: 'Bad Script', cursive;
+    font-size: 18px;
+    
+    } 
+
+    #momsConnectPic {
+    width: 780px;
+    height: 150px;
+      
+    }
+
+    li {
+    color: white;
+    }
+
+    #SignInLi{
+      position: relative;
+      left: -10px;
+    }
+
+   
+    
+    .navbar-default .navbar-nav>li>a{
+      font-size: 15px;
+      line-height: 14px;
+      font-family: verdana;
+
+    }
+
+    .et_pb_fullwidth_header_subhead {
+      text-align: center;
+      font-family: 'Bad Script', cursive;
+      display: block;
+      text-transform: uppercase !important;
+      letter-spacing: 5px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    #info {
+      text-align: center;
+      font-family: verdana;
+      font-size: 14px;
+      margin-bottom: 15px;
+      background: transparent;
+
+    }
+
+    #info_email {
+    color: black;
+
+  }
+
+   .glyphicon.glyphicon-envelope {
+    color: black;
+  }
+
+
+
+</style>
 
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -74,15 +170,13 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Resources</a></li>
-        
-        <li><a href="members.html">View Members</a></li>
         <li><a data-toggle="modal" data-target="#modalRegister">Register</a></li>
-
+        <li><a href="members.html">View Members</a></li>
+        <li><a href="meetup.html">Meet Ups</a></li>
+        <li><a href="#">Playgrounds</a></li>
       </ul>
       <ul id = "SignInUl" class="nav navbar-nav navbar-right">
         <li id = "SignInLi"><a data-toggle="modal" data-target="#modalSignIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-
       </ul>
     </div>
   </div>
@@ -91,15 +185,30 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <!--This is where the local weather feature will be placed -->
+      <H6><b>About Us:</b></H6>
+      <p>Mom’s Connect is a place where moms with kids below 3 years old can come and learn, share and connect with other moms.  We are located in Ashburn, VA.  We can’t wait to meet you! 
+      </p>
+
     </div>
 
     <div class="col-sm-8 text-left">
-      <h1>Let's Meet up</h1>
-      <p>This site is for new mom's trying to connect to others in their area.</p>
+    <img src="assets/images/momsconnect.jpg" id="momsConnectPic">
+    <span class="et_pb_fullwidth_header_subhead">Mom's Connect | Events | Join Us | Contact Us </span>
+    <div id="info">
+      <span class="glyphicon glyphicon-earphone"></span>
+        <span id="info_phone">703.456.7634</span>
+            <a href="mailto:momsconnectashburn@gmail.com">
+          <span class="glyphicon glyphicon-envelope"></span> 
+        <span id="info_email">Momsconnect@gmail.com</span>
+      </a>
+        <a href="https://www.facebook.com/groups/momsconnectgroup/">
+          <i class="fa fa-facebook-official" style="font-size:19px"></i>
+        </a>
+        <a href="https://twitter.com/CityMommyDC">
+          <i class="fa fa-twitter-square" style="font-size:19px"></i>
+        </a>
+    </div>
 
-      <hr>
-      <h3>Scheduled Meet-Ups</h3>
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->
           <ol class="carousel-indicators">
@@ -141,7 +250,7 @@
 </div>
 
 <footer class="container-fluid text-center">
-  <p>Footer Text</p>
+  <p>Copyright Mom's Connect 2017</p>
 </footer>
 
 

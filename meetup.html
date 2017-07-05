@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title></title>
+
+	<meta charset="utf-8">
+	<title>Meetup Groups</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/meetup.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+
+h4 {
+	text-align: center;
+}
+h2 {
+	margin-left: 20px;
+	font-family: verdana;
+}
+
+h5 {
+	margin-left: 20px;
+	font-family: verdana;
+	font-size: 21px;
+}
+
+body {
+	background-color: #fac5f6;
+}
+
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url("assets/images/glyphicons-28-search.png");
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 30%;
+}
+
+button {
+	font-size: 20px;	
+}
+
+p {
+	width: 80%;
+	margin-left: 20px;
+	font-family: verdana;
+}
+
+hr {
+	width: 96%;
+}
+
+.jumbotron {
+	font-family: verdana;
+	background-image: url(assets/images/background.png);
+}
+
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+   <div class="jumbotron">
+     <h1 class="text-center">Meetup groups in the area!</h1>
+     <h4>Search for a list of upcoming Meetup groups in and around Ashburn, VA for Moms.</h4>
+   </div>
+   <div class="row">
+      
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body">
+        	<label for="group-input"></label>
+  			<button type="button" id="searchButton" class="btn btn-info">Find Groups</button>
+  			<div id="resultsGoHere"></div>
+		</div>
+			
+  		</div>  
+    </div>
+   </div>
+ </div> 
+   
+</body>
+</html>
