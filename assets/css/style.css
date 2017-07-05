@@ -5,7 +5,10 @@
   text-align:center;
 }
 
+.tooltip-inner{
 
+  background:red;
+}
 
 
 #SignInGlyph{

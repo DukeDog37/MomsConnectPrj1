@@ -171,7 +171,6 @@ $("#SignInUl").append(newSignIn);
 $("#SignInUl").append(newLogOut);
 
 
-
 };
 
 
@@ -182,6 +181,9 @@ function LogOut(){
   deleteCookie("username",user,0);
 
 }
+
+clearToolTip();
+
 	$("#SignInUl").empty();
 
 var newLogin = $("<li>");
@@ -283,16 +285,33 @@ function getCookie(cname) {
 
 
 function checkCookie() {
-    var user=getCookie("username");
+    var user = getCookie("username");
     if (user != "") {
-$("#WelcomeBack").html(user)
+$("#WelcomeBackUser").html(user)
 $("#WelcomeBackModal").modal("show");
 
         SignedIn(user);
     } else {
 
       console.log(user)
+      // $("#usrname").tooltip("hide")
+      // $("#psw").tooltip("hide")
+
       $("#modalSignIn").modal("show");
 
     }
+}
+
+function clearToolTip(){
+console.log("here");
+
+
+$("#username").val("");
+$("#psw").val("");
+
+
+
+  $("#username").tooltip('hide');
+  $("#psw").tooltip('hide');
+
 }
