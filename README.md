@@ -15,3 +15,6 @@ First Team 4 Project
   };
   firebase.initializeApp(config);
 </script>
+
+# Google Maps Key for reference
+AIzaSyC5FnoMDUEmr0pqGC3ZpIRvffD4uKzFGQ0

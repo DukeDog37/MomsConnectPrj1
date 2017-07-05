@@ -163,14 +163,14 @@
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
+      <div class="modal-content" style='align-items: center;'>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Map to the park</h4>
+          <p id="ParkAddr"></p>
         </div>
         <div class="modal-body">
-          <p id="ParkAddr"></p>
-          <div id="mapCanvas" style="width: 400px; height: 400px;"></div>
+          <div class="mapCanvas" id="mapCanvas" style="width: 575px; height: 400px;"></div> 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -303,9 +303,8 @@
             position: results[0].geometry.location,
             map: map
            });
+          map.setCenter(results[0].geometry.location);
           parkMarker.setMap(map);
-         map.setCenter(results[0].geometry.location);
-         google.maps.event.trigger(map, "resize");
          
          console.log("made it: " + results[0].geometry.location);
         }
