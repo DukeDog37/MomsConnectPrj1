@@ -1,5 +1,16 @@
 /* Remove the navbar's default margin-bottom and rounded borders */
 
+.welcomeBack
+{
+  text-align:center;
+}
+
+.tooltip-inner{
+
+  background:red;
+}
+
+
 #SignInGlyph{
 
 position:relative;
@@ -20,10 +31,7 @@ top:5px
 }
 
 
-#map {
-    height: 400px;
-    width: 100%;
-   }
+
 .navbar {
   margin-bottom: 0;
   border-radius: 0;

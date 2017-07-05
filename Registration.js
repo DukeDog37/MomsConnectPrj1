@@ -20,29 +20,17 @@ function fnRegisterMom(){
     event.preventDefault();
 
     var name = $("#name-input").val().trim();
-    //console.log(name);
     var address1 = $("#address1-input").val().trim();
-    //console.log(address1);
     var address2 = $("#address2-input").val().trim();
-    //console.log(address2);
     var city = $("#city-input").val().trim();
-    //console.log(city);
     var state = $("#state-input").val().trim();
-    //console.log(state);
     var zipcode = $("#zipcode-input").val().trim();
-    //console.log(zipcode);
     var email = $("#email-input").val().trim();
-    //console.log(email);
     var userId = email.substring(0, email.indexOf("@"));
-    //console.log(userId);
     var phone = $("#phone-input").val().trim();
-    //console.log(phone);
     var password = $("#password-input").val().trim();
-    //console.log(password);
     var regdate = new Date();
-
     var childage = $("#childage-input").val().trim();
-
     var boygirl = "Not Specified";
     boygirl = $('input[name=optradio]:checked').val();
 
@@ -69,21 +57,7 @@ function fnRegisterMom(){
         rememberUser: remUser
       });
 
-
-//alert("hold on");
 }
-
-//lookup geo coords from address
-function fnGeoLookup(address){
-
-    var strGeo = "";
-
-
-
-    return strGeo;
-}
-
-
 
 //Pull Registration data
 function fnFetchMembers(){
@@ -111,20 +85,15 @@ function fnFetchMembers(){
         console.log(childData); //will log out each mom record
         console.log(childSnapshot.val().name);
         //load each result into the table on the members.html form
-        // full list of items to the well
-      $("#full-member-list").append("<div class='well'>" +
-        "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" +
-        " <span id='name'>   " + childSnapshot.val().name +
-        " </span><span id='address'> " + childSnapshot.val().address1 + " " + childSnapshot.val().address2 +
-        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode +
-        " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " Who is age: " + childSnapshot.val().childage + " </span>" +
-        "</div>");
+      $("#member-table > tbody").append("<tr><td><button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-pencil'></span></button></td><td>" + childSnapshot.val().name + 
+        "</td><td>" + childSnapshot.val().address1 + " " + childSnapshot.val().address2 +
+        " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + "</td><td>" +
+        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + " age: " + childSnapshot.val().childage + " </span>" + "</td><td 'align=right'>" +
+        "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" + "</td><tr>");
 
         });
 
-  // ...
-
-        // Handle the errors
+       // Handle the errors
     }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
     });
@@ -136,21 +105,16 @@ function fnFetchMembers(){
 
 var userArray = [];
 var attemptedLogin = false;
+var RememberUser;
 
 function checkSignIn(){
 	event.preventDefault();
-
-
 	var email = $("#usrname").val();
 	var password = $("#psw").val();
-
 	var user = "";
-
 if(attemptedLogin === false)
 
 {
-
-
 
 	var config = {
 	apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
@@ -161,39 +125,29 @@ if(attemptedLogin === false)
 	messagingSenderId: "102438011730"
 	};
 
-
 	firebase.initializeApp(config);
 	var database = firebase.database();
 
-
-
-
-var query = firebase.database().ref("moms/").orderByKey();
-query.once("value")
+    var query = firebase.database().ref("moms/").orderByKey();
+    query.once("value")
      .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       var key = childSnapshot.key;
-			// console.log(key);
+	  // console.log(key);
       // childData will be the actual contents of the child
       var childData = childSnapshot.val();
-
-			userArray.push(childData);
-			// console.log(childData);
-
-
-		});
-
-checkUser(email,password,user);
-attemptedLogin = true;
-
+		userArray.push(childData);
+		// console.log(childData);
 	});
-}
 
+    checkUser(email,password,user);
+    attemptedLogin = true;
+
+    	});
+    }
 	else {
-    console.log('here')
 			checkUser(email,password,user);
-
-			}
+	}
 
 // end of function
 };
@@ -217,13 +171,18 @@ $("#SignInUl").append(newSignIn);
 $("#SignInUl").append(newLogOut);
 
 
-
 };
 
 
 
 function LogOut(){
+  var user=getCookie("username");
+  if (user != "") {
+  deleteCookie("username",user,0);
 
+}
+
+clearToolTip();
 
 	$("#SignInUl").empty();
 
@@ -247,6 +206,7 @@ function checkUser(email,password,user){
 
 			{
 				console.log("user not found");
+        $("#usrname").tooltip('show');
 			}
 			if(userArray[i].email === email)
 			{
@@ -262,14 +222,19 @@ function checkUser(email,password,user){
 					user = userArray[i].name;
 					SignedIn(user);
 
-					// Cookies.set('email', email);
-					// Cookies.set('password', password);
+
+        // store da cookie
+          if (user != "" && user != null) {
+              setCookie("username", user, 30);
+          }
 
 				}
 
 
 				if(userArray[i].password != password) {
 				console.log("incorrect pass")
+        $("#psw").tooltip('show');
+
 				}
 
 
@@ -279,3 +244,74 @@ function checkUser(email,password,user){
 };
 
 };
+
+
+
+// setting cookies below
+
+function deleteCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
+
+function checkCookie() {
+    var user = getCookie("username");
+    if (user != "") {
+$("#WelcomeBackUser").html(user)
+$("#WelcomeBackModal").modal("show");
+
+        SignedIn(user);
+    } else {
+
+      console.log(user)
+      // $("#usrname").tooltip("hide")
+      // $("#psw").tooltip("hide")
+
+      $("#modalSignIn").modal("show");
+
+    }
+}
+
+function clearToolTip(){
+console.log("here");
+
+
+$("#username").val("");
+$("#psw").val("");
+
+
+
+  $("#username").tooltip('hide');
+  $("#psw").tooltip('hide');
+
+}
