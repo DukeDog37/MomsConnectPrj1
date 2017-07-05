@@ -94,10 +94,10 @@ function fnFetchMembers(){
         " </span><br><span id='childinfo'> " + childSnapshot.val().boygirl + " age: " + childSnapshot.val().childage + " </span>" +
         "</div>");*/
 
-      $("#member-table > tbody").append("<tr><td></td><td>" + childSnapshot.val().name + 
+      $("#member-table > tbody").append("<tr><td><button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-pencil'></span></button></td><td>" + childSnapshot.val().name + 
         "</td><td>" + childSnapshot.val().address1 + " " + childSnapshot.val().address2 +
         " " + childSnapshot.val().city + ", " + childSnapshot.val().state + " " + childSnapshot.val().zipcode + "</td><td>" +
-        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + " age: " + childSnapshot.val().childage + " </span>" +
+        " </span><span id='childinfo'> " + childSnapshot.val().boygirl + " age: " + childSnapshot.val().childage + " </span>" + "</td><td 'align=right'>" +
         "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + moreContact + "'><span class='glyphicon glyphicon-user'></span> Contact Details</button>" + "</td><tr>");
 
         });

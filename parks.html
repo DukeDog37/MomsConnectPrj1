@@ -188,6 +188,7 @@
   <!-- Script -->
   <script>
    $(document).ready(function(){
+    var map;
     // Initialize Firebase
     var config = {
     apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
@@ -285,10 +286,13 @@
       zoom: 12,
       mapTypeId: 'hybrid'
       };
-    var map = new google.maps.Map(document.getElementById("mapCanvas"),
+      var map = new google.maps.Map(document.getElementById("mapCanvas"),
       mapOptions);
-    var marker = new google.maps.Marker({
+      var marker = new google.maps.Marker({
       position: new google.maps.LatLng(39.030643, -77.469985)
+
+
+
       });
         marker.setMap(map); 
 
@@ -305,7 +309,7 @@
            });
           map.setCenter(results[0].geometry.location);
           parkMarker.setMap(map);
-         
+          google.maps.event.trigger(map, "resize"); //added this resize call
          console.log("made it: " + results[0].geometry.location);
         }
       });
@@ -313,13 +317,13 @@
     });
     //call resize to fix map
     // Resize map to show on a Bootstrap's modal
-    $(document).on('show.bs.modal','#myModal', function () {
+    /*$(document).on('shown.bs.modal','#myModal', function () {
       var map = new google.maps.Map(document.getElementById("mapCanvas"));
       var currentCenter = map.getCenter();  // Get current center before resizing
       console.log("in modal resize");
       google.maps.event.trigger(map, "resize");
       map.setCenter(currentCenter); // Re-set previous center
-    });
+    });*/
 
 });
 /*$('#myModal').on('shown.bs.modal', function() {
