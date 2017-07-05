@@ -140,18 +140,12 @@ var RememberUser;
 
 function checkSignIn(){
 	event.preventDefault();
-
-
 	var email = $("#usrname").val();
 	var password = $("#psw").val();
-
 	var user = "";
-
 if(attemptedLogin === false)
 
 {
-
-
 
 	var config = {
 	apiKey: "AIzaSyDrLO-RSZ-B6BD4gxJXqCOnMLA19DFHcsI",
@@ -162,38 +156,29 @@ if(attemptedLogin === false)
 	messagingSenderId: "102438011730"
 	};
 
-
 	firebase.initializeApp(config);
 	var database = firebase.database();
 
-
-
-
-var query = firebase.database().ref("moms/").orderByKey();
-query.once("value")
+    var query = firebase.database().ref("moms/").orderByKey();
+    query.once("value")
      .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       var key = childSnapshot.key;
-			// console.log(key);
+	  // console.log(key);
       // childData will be the actual contents of the child
       var childData = childSnapshot.val();
-
-			userArray.push(childData);
-			// console.log(childData);
-
-
-		});
-
-checkUser(email,password,user);
-attemptedLogin = true;
-
+		userArray.push(childData);
+		// console.log(childData);
 	});
-}
 
+    checkUser(email,password,user);
+    attemptedLogin = true;
+
+    	});
+    }
 	else {
 			checkUser(email,password,user);
-
-			}
+	}
 
 // end of function
 };

@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>New Mom's Connect - git check jason</title>
+  <title>New Mom's Connect</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
-
- <script type="text/javascript" src="Registration.js"></script>
-
- <script src="assets/javascript/js-cookie.js"></script>
- <script src="assets/javascript/tether.min.js"></script>
-
- </script>
+  <script type="text/javascript" src="Registration.js"></script>
+  <script src="assets/javascript/js-cookie.js"></script>
+  <script src="assets/javascript/tether.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-  <link rel="stylesheet" href="assets/css/style.css">
-
   <script src="assets/javascript/validator.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -76,9 +70,15 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Resources</a></li>
-
-        <li><a href="members.html">View Members</a></li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Resources
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="members.html">View Members</a></li>
+          <li><a href="#">Local Groups</a></li>
+          <li><a href="#">Top Rated Parks</a></li>
+        </ul>
+      </li>
         <li><a data-toggle="modal" data-target="#modalRegister">Register</a></li>
 
       </ul>
@@ -94,6 +94,7 @@
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <!--This is where the local weather feature will be placed -->
+      
     </div>
 
     <div class="col-sm-8 text-left">
