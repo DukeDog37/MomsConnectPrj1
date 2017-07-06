@@ -251,7 +251,7 @@
       });
 
       // alert that the new record was suucessfully added
-      alert("New Park Record Added to Firebase");
+      //alert("New Park Record Added to Firebase");
 
       // Clears all values after entr is made
       $("#name-input").val("");
@@ -260,7 +260,7 @@
       $("#hours-input").val("");
       $("#imgloc-input").val("");
 
-      // Determine when the next train arrives.
+      
       return false;
 
     });
@@ -278,7 +278,7 @@
 
     // Add each park's data into the table
       $("#park-table > tbody").append("<tr><td><img id='openmodal' src="+ parkImgLoc + "></img></td><td>" + parkName + "</td><td>" + parkAddress + "</td><td>" +
-        + parkPhone + "</td><td>" + parkHours + "</td><td>" +
+        parkPhone + "</td><td>" + parkHours + "</td><td>" +
         "<button type='button' class='btn btn-default btn-sm' id='openmodal' data-toggle='modal' data-target='#myModal' data-value='" + parkAddress + "'><span class='glyphicon glyphicon-map-marker'></span> Map Park</button>" + "</td><tr>");
 
       
