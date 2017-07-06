@@ -19,7 +19,7 @@ $("#searchButton").on("click", function(event) {
             for(var i = 0; i <response.length; i++) {
                 var details = response[i];
         	 
-                $("#resultsGoHere").append("<br>" + "<div class='well'>" + "<a href='" + details.link +"'><h2>" + details.name + "</h2></a>" + "<h5>" + details.city + "</h5>" +  details.description + "</div>");
+                $("#resultsGoHere").append("<br>" + "<div class='well'>" + "<a href='" + details.link +"' target='_blank'><h2>" + details.name + "</h2></a>" + "<h5>" + details.city + "</h5>" +  details.description + "</div>");
         	  
         	}
         	$("#resultsGoHere").append("</form>");
